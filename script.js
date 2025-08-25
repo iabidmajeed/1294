@@ -378,18 +378,29 @@ function detectInAppBrowser() {
           max-width: 400px;
           width: 100%;
         ">
-          <h2 style="margin: 0 0 20px 0; font-size: 24px; font-weight: bold;">
-            🌐 Browser Mein Kholiye
+          <div style="margin-bottom: 20px;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="margin-bottom: 15px;">
+              <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.1 3.9 23 5 23H11V21H5V19H9V17H5V15H11V13H5V11H9V9H5V7H13V9H21ZM15 15V13H17V11H19V13H21V15H19V17H17V15H15Z" fill="white"/>
+            </svg>
+          </div>
+          <h2 style="margin: 0 0 15px 0; font-size: 26px; font-weight: 600; letter-spacing: -0.5px;">
+            Open in Browser
           </h2>
-          <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.5;">
-            Behtar experience ke liye is website ko apne browser mein kholiye.
+          <p style="margin: 0 0 25px 0; font-size: 16px; line-height: 1.6; opacity: 0.9;">
+            For the best experience, please open this website in your default browser.
           </p>
-          <div style="margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
-            <p style="margin: 0; font-size: 14px;">
-              📱 <strong>Kaise karein:</strong><br>
-              Menu (⋯) ya Share button pe tap karke<br>
-              "Open in Browser" select kariye
-            </p>
+          <div style="margin: 25px 0; padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2);">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="width: 32px; height: 32px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                <span style="font-size: 16px;">📱</span>
+              </div>
+              <p style="margin: 0; font-size: 15px; font-weight: 600;">How to open:</p>
+            </div>
+            <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5;">
+              <li style="margin-bottom: 8px;">Tap the menu button (⋯) or share icon</li>
+              <li style="margin-bottom: 8px;">Look for "Open in Browser" or "Open in Safari/Chrome"</li>
+              <li>Select your preferred browser</li>
+            </ol>
           </div>
           <button onclick="hideOverlay()" 
                   style="
