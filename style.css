@@ -1259,7 +1259,7 @@ span.sym {
   width: 100%;
   padding: 2vw;
   position: relative;
-  height: auto;
+  height: 100% !important;
 }
 .swiper {
   width: 100%;
