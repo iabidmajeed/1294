@@ -315,21 +315,118 @@ function workedAgency() {
 workedAgency();
 
 //Website Open in External Browsers
+//Website Open in External Browsers
 function detectInAppBrowser() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
-  const inApp =
-    ua.includes("LinkedIn") ||
-    ua.includes("FBAN") ||
-    ua.includes("FBAV") ||
-    ua.includes("Instagram");
 
-  if (inApp) {
-    document.body.innerHTML = `
-                    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px;color:#fff;">
-                        <h2>Open in Your Browser</h2>
-                        <p>Tap the menu (three dots) and select "Open in Browser" for the best experience.</p>
-                    </div>
-                `;
+  // More comprehensive in-app browser detection
+  const inAppPatterns = [
+    "LinkedIn",
+    "FBAN", // Facebook App
+    "FBAV", // Facebook App
+    "Instagram",
+    "Twitter",
+    "WhatsApp",
+    "Snapchat",
+    "TikTok",
+    "Line/",
+    "WeChat",
+    "Telegram",
+    "Viber",
+    "GSA/", // Google Search App
+    "Pinterest",
+  ];
+
+  const isInApp = inAppPatterns.some((pattern) => ua.includes(pattern));
+
+  // Additional check for iOS in-app browsers
+  const isIOSInApp =
+    /iPhone|iPad/.test(ua) && !ua.includes("Safari/") && ua.includes("Mobile/");
+
+  // Additional check for Android WebView
+  const isAndroidWebView = ua.includes("wv") && ua.includes("Android");
+
+  if (isInApp || isIOSInApp || isAndroidWebView) {
+    // Create overlay instead of replacing entire content
+    const overlay = document.createElement("div");
+    overlay.id = "browser-redirect-overlay";
+    overlay.innerHTML = `
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        z-index: 9999;
+        box-sizing: border-box;
+      ">
+        <div style="
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          padding: 30px;
+          border-radius: 20px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          max-width: 400px;
+          width: 100%;
+        ">
+          <h2 style="margin: 0 0 20px 0; font-size: 24px; font-weight: bold;">
+            🌐 Browser Mein Kholiye
+          </h2>
+          <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.5;">
+            Behtar experience ke liye is website ko apne browser mein kholiye.
+          </p>
+          <div style="margin: 20px 0; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
+            <p style="margin: 0; font-size: 14px;">
+              📱 <strong>Kaise karein:</strong><br>
+              Menu (⋯) ya Share button pe tap karke<br>
+              "Open in Browser" select kariye
+            </p>
+          </div>
+          <button onclick="hideOverlay()" 
+                  style="
+                    background: #fff;
+                    color: #667eea;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                  ">
+            Continue Anyway
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // Auto-hide after 10 seconds
+    setTimeout(hideOverlay, 10000);
   }
 }
-detectInAppBrowser();
+
+// Function to hide the overlay
+function hideOverlay() {
+  const overlay = document.getElementById("browser-redirect-overlay");
+  if (overlay) {
+    overlay.style.display = "none";
+  }
+}
+
+// Run detection when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", detectInAppBrowser);
+} else {
+  detectInAppBrowser();
+}
