@@ -315,10 +315,8 @@ function workedAgency() {
 workedAgency();
 
 //Website Open in External Browsers
-function websiteBrowser() {
+function detectInAppBrowser() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-  // Detect in-app browsers
   const inApp =
     ua.includes("LinkedIn") ||
     ua.includes("FBAN") ||
@@ -326,14 +324,12 @@ function websiteBrowser() {
     ua.includes("Instagram");
 
   if (inApp) {
-    // Clear the page and show a friendly message with a button
     document.body.innerHTML = `
-      <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px;">
-        <h2>Open in Your Browser</h2>
-        <p>For the best experience, please open this page in your default browser.</p>
-        <a href="https://www.abidmajeed.work" target="_blank" style="padding:12px 24px;background-color:#0073b1;color:white;text-decoration:none;border-radius:5px;font-size:16px;">Open in Browser</a>
-      </div>
-    `;
+                    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px;color:#fff;">
+                        <h2>Open in Your Browser</h2>
+                        <p>Tap the menu (three dots) and select "Open in Browser" for the best experience.</p>
+                    </div>
+                `;
   }
 }
-websiteBrowser();
+detectInAppBrowser();
