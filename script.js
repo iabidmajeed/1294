@@ -3,7 +3,48 @@
 //   smooth: true,
 //   // lerp: 0.02,
 // });
+function locomotiveAnimation() {
+  gsap.registerPlugin(ScrollTrigger);
 
+  // Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
+
+  const locoScroll = new LocomotiveScroll({
+    el: document.querySelector("#main"),
+    smooth: true,
+  });
+  // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
+  locoScroll.on("scroll", ScrollTrigger.update);
+
+  // tell ScrollTrigger to use these proxy methods for the "#main" element since Locomotive Scroll is hijacking things
+  ScrollTrigger.scrollerProxy("#main", {
+    scrollTop(value) {
+      return arguments.length
+        ? locoScroll.scrollTo(value, 0, 0)
+        : locoScroll.scroll.instance.scroll.y;
+    }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+    getBoundingClientRect() {
+      return {
+        top: 0,
+        left: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+    },
+    // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
+    pinType: document.querySelector("#main").style.transform
+      ? "transform"
+      : "fixed",
+  });
+
+  // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
+  ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+
+  // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+  ScrollTrigger.refresh();
+}
+locomotiveAnimation();
+
+//Header animation
 function headerAnimation() {
   // GSAP Timeline
   const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 0.8 } });
@@ -38,6 +79,7 @@ function headerAnimation() {
 }
 headerAnimation();
 
+//Hero section animation
 function heroAnimation() {
   document.addEventListener("DOMContentLoaded", () => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
@@ -52,31 +94,41 @@ function heroAnimation() {
 }
 heroAnimation();
 
+//Marquee Text animation
 function marqueText() {
+  function animateForward() {
+    gsap.to(".marquee", {
+      x: "-200%",
+      duration: 4,
+      repeat: -1,
+      ease: "none",
+    });
+    gsap.to(".marquee img", { rotate: 180 });
+  }
+
+  function animateBackward() {
+    gsap.to(".marquee", {
+      x: "0%",
+      duration: 4,
+      repeat: -1,
+      ease: "none",
+    });
+    gsap.to(".marquee img", { rotate: 0 });
+  }
+
+  // Desktop (wheel)
   window.addEventListener("wheel", function (dets) {
-    if (dets.deltaY > 0) {
-      gsap.to(".marquee", {
-        transform: "translateX(-200%)",
-        duration: 4,
-        repeat: -1,
-        ease: "none",
-      });
+    if (dets.deltaY > 0) animateForward();
+    else animateBackward();
+  });
 
-      gsap.to(".marquee img", {
-        rotate: 180,
-      });
-    } else {
-      gsap.to(".marquee", {
-        transform: "translateX(0%)",
-        duration: 4,
-        repeat: -1,
-        ease: "none",
-      });
+  // Mobile (touch scroll)
+  window.addEventListener("touchmove", function () {
+    animateForward();
+  });
 
-      gsap.to(".marquee img", {
-        rotate: 0,
-      });
-    }
+  window.addEventListener("touchend", function () {
+    animateBackward();
   });
 }
 marqueText();
@@ -126,6 +178,7 @@ function servicesAnimation() {
   gsap
     .timeline({
       scrollTrigger: {
+        scroller: "#main",
         trigger: "#our-services-section",
         start: "top 80%", // start animation when section is 80% in viewport
         end: "bottom 60%",
@@ -258,16 +311,5 @@ function workedAgency() {
       panel.classList.remove("active");
     });
   }
-
-  // Swiper Carousel
-  var swiper = new Swiper(".agencySwiper", {
-    slidesPerView: 2,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-      delay: 2000,
-      disableOnInteraction: false,
-    },
-  });
 }
 workedAgency();
