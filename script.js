@@ -315,7 +315,6 @@ function workedAgency() {
 workedAgency();
 
 //Website Open in External Browsers
-//Website Open in External Browsers
 function detectInAppBrowser() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
 
@@ -356,78 +355,55 @@ function detectInAppBrowser() {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: auto;
+        min-height: 120px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        text-align: center;
-        padding: 20px;
+        padding: 15px 20px;
         color: #fff;
-        font-family: Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         z-index: 9999;
         box-sizing: border-box;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       ">
         <div style="
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.15);
           backdrop-filter: blur(10px);
-          padding: 30px;
-          border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          max-width: 400px;
+          padding: 20px 25px;
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          max-width: 600px;
           width: 100%;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          gap: 15px;
         ">
-          <div style="margin-bottom: 20px;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style="margin-bottom: 15px;">
+          <div style="flex-shrink: 0;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
               <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.1 3.9 23 5 23H11V21H5V19H9V17H5V15H11V13H5V11H9V9H5V7H13V9H21ZM15 15V13H17V11H19V13H21V15H19V17H17V15H15Z" fill="white"/>
             </svg>
           </div>
-          <h2 style="margin: 0 0 15px 0; font-size: 26px; font-weight: 600; letter-spacing: -0.5px;">
-            Open in Browser
-          </h2>
-          <p style="margin: 0 0 25px 0; font-size: 16px; line-height: 1.6; opacity: 0.9;">
-            For the best experience, please open this website in your default browser.
-          </p>
-          <div style="margin: 25px 0; padding: 20px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2);">
-            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-              <div style="width: 32px; height: 32px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
-                <span style="font-size: 16px;">📱</span>
-              </div>
-              <p style="margin: 0; font-size: 15px; font-weight: 600;">How to open:</p>
-            </div>
-            <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5;">
-              <li style="margin-bottom: 8px;">Tap the menu button (⋯) or share icon</li>
-              <li style="margin-bottom: 8px;">Look for "Open in Browser" or "Open in Safari/Chrome"</li>
-              <li>Select your preferred browser</li>
-            </ol>
+          <div style="flex: 1; text-align: left;">
+            <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600;">
+              Open in Browser
+            </h3>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.4;">
+              For the best experience, tap the menu (⋯) and select "Open in Browser"
+            </p>
           </div>
-          <button onclick="hideOverlay()" 
-                  style="
-                    background: #fff;
-                    color: #667eea;
-                    border: none;
-                    padding: 12px 24px;
-                    border-radius: 25px;
-                    font-size: 14px;
-                    font-weight: bold;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                  ">
-            Continue Anyway
-          </button>
+
         </div>
       </div>
     `;
 
     document.body.appendChild(overlay);
-
-    // Auto-hide after 10 seconds
-    setTimeout(hideOverlay, 10000);
   }
 }
 
-// Function to hide the overlay
+// Function to hide the overlay (not needed anymore but keeping for future use)
 function hideOverlay() {
   const overlay = document.getElementById("browser-redirect-overlay");
   if (overlay) {
