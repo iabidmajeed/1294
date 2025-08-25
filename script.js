@@ -355,9 +355,9 @@ function detectInAppBrowser() {
         top: 0;
         left: 0;
         width: 100%;
-        height: auto;
+        height: 100vh;
         min-height: 120px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #111;
         display: flex;
         justify-content: center;
         align-items: center;
