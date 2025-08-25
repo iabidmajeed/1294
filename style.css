@@ -913,6 +913,13 @@ span.sym {
     font-size: 17px;
     padding: 9px 28px;
   }
+  #about-left-part img.circle-img {
+    position: absolute;
+    right: -27px !important;
+    bottom: -20px;
+    width: 190px;
+    animation: rotateInfinite 10s linear infinite;
+  }
 }
 
 /* Desktop (769px and up) */
