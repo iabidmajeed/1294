@@ -313,3 +313,29 @@ function workedAgency() {
   }
 }
 workedAgency();
+
+//Website Open in External Browsers
+function websiteBrowser() {
+  function isInAppBrowser() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    return (
+      ua.includes("LinkedIn") ||
+      ua.includes("FBAN") ||
+      ua.includes("FBAV") ||
+      ua.includes("Instagram")
+    );
+  }
+
+  if (isInAppBrowser()) {
+    // Optional: Automatically try to open in external browser (not guaranteed)
+    window.location.href = "googlechrome://www.abidmajeed.work"; // For Android Chrome
+    // OR show a message/button
+    document.body.innerHTML = `
+        <div style="text-align:center; padding: 20px;">
+            <p>For best experience, please open this page in your browser.</p>
+            <a href="https://www.abidmajeed.work" target="_blank" style="padding: 10px 20px; background-color: #0073b1; color: white; text-decoration: none; border-radius: 5px;">Open in Browser</a>
+        </div>
+    `;
+  }
+}
+websiteBrowser();
