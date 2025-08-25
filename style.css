@@ -1259,7 +1259,7 @@ span.sym {
   width: 100%;
   padding: 2vw;
   position: relative;
-  height: 100% !important;
+  height: auto;
 }
 .swiper {
   width: 100%;
@@ -1275,7 +1275,8 @@ span.sym {
   justify-content: flex-start;
   align-items: flex-end;
   border-radius: 10px;
-  height: 450px !important;
+  height: 100% !important;
+  min-height: 450px !important;
   overflow: hidden;
   color: #fff;
   padding: 10px;
