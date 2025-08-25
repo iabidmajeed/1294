@@ -316,25 +316,23 @@ workedAgency();
 
 //Website Open in External Browsers
 function websiteBrowser() {
-  function isInAppBrowser() {
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    return (
-      ua.includes("LinkedIn") ||
-      ua.includes("FBAN") ||
-      ua.includes("FBAV") ||
-      ua.includes("Instagram")
-    );
-  }
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-  if (isInAppBrowser()) {
-    // Optional: Automatically try to open in external browser (not guaranteed)
-    window.location.href = "googlechrome://www.abidmajeed.work"; // For Android Chrome
-    // OR show a message/button
+  // Detect in-app browsers
+  const inApp =
+    ua.includes("LinkedIn") ||
+    ua.includes("FBAN") ||
+    ua.includes("FBAV") ||
+    ua.includes("Instagram");
+
+  if (inApp) {
+    // Clear the page and show a friendly message with a button
     document.body.innerHTML = `
-        <div style="text-align:center; padding: 20px;">
-            <p>For best experience, please open this page in your browser.</p>
-            <a href="https://www.abidmajeed.work" target="_blank" style="padding: 10px 20px; background-color: #0073b1; color: white; text-decoration: none; border-radius: 5px;">Open in Browser</a>
-        </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;text-align:center;padding:20px;">
+        <h2>Open in Your Browser</h2>
+        <p>For the best experience, please open this page in your default browser.</p>
+        <a href="https://www.abidmajeed.work" target="_blank" style="padding:12px 24px;background-color:#0073b1;color:white;text-decoration:none;border-radius:5px;font-size:16px;">Open in Browser</a>
+      </div>
     `;
   }
 }
