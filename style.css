@@ -1276,8 +1276,8 @@ span.sym {
   align-items: flex-end;
   border-radius: 10px;
   height: 100% !important;
-  min-height: 450px !important;
-  overflow: hidden;
+  /* min-height: 450px !important; */
+  /* overflow: hidden; */
   color: #fff;
   padding: 10px;
 }
