@@ -122,8 +122,8 @@ body {
   text-transform: uppercase;
 }
 img.uae-flag {
-  width: 21px;
-  margin-bottom: -5px;
+  width: 21px !important;
+  margin-bottom: -5px !important;
 }
 #menu-items a:focus {
   outline: none !important;
